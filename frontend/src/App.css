@@ -1,0 +1,780 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #020617;
+  color: #f8fafc;
+}
+
+.app {
+  min-height: 100vh;
+  padding-bottom: 60px;
+}
+
+
+/* =========================
+   HERO
+========================= */
+
+.hero {
+  text-align: center;
+  padding: 70px 20px 60px;
+  background:
+    radial-gradient(
+      circle at top,
+      #1e1b4b 0%,
+      #0f172a 45%,
+      #020617 100%
+    );
+  border-bottom: 1px solid #1e293b;
+}
+
+.hero-badge {
+  display: inline-block;
+  padding: 8px 15px;
+  border: 1px solid #4c1d95;
+  border-radius: 30px;
+  color: #a78bfa;
+  font-size: 12px;
+  font-weight: bold;
+  letter-spacing: 1.5px;
+  margin-bottom: 20px;
+}
+
+.hero h1 {
+  margin: 0;
+  font-size: 56px;
+  letter-spacing: -2px;
+}
+
+.hero p {
+  max-width: 650px;
+  margin: 18px auto;
+  color: #94a3b8;
+  font-size: 18px;
+  line-height: 1.6;
+}
+
+.hero-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 15px;
+  color: #86efac;
+  font-size: 14px;
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  background: #22c55e;
+  border-radius: 50%;
+  box-shadow: 0 0 10px #22c55e;
+}
+
+
+/* =========================
+   SECTION
+========================= */
+
+.section-block,
+.analysis-section,
+.history {
+  width: 90%;
+  max-width: 1100px;
+  margin: 55px auto;
+}
+
+.section-heading {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 25px;
+}
+
+.section-heading > span {
+  color: #7c3aed;
+  font-size: 13px;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+.section-heading h2 {
+  margin: 0;
+  font-size: 25px;
+}
+
+.section-heading p {
+  margin: 5px 0 0;
+  color: #64748b;
+  font-size: 14px;
+}
+
+
+/* =========================
+   STATS
+========================= */
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+}
+
+.stat-card {
+  padding: 25px;
+  background: #0f172a;
+  border: 1px solid #1e293b;
+  border-radius: 16px;
+  position: relative;
+  overflow: hidden;
+}
+
+.stat-card::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 3px;
+  background: #475569;
+}
+
+.stat-card h3 {
+  margin: 12px 0;
+  color: #94a3b8;
+  font-size: 14px;
+}
+
+.stat-card strong {
+  font-size: 34px;
+}
+
+.stat-icon {
+  width: 35px;
+  height: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9px;
+  background: #1e293b;
+  color: #a78bfa;
+  font-weight: bold;
+}
+
+.low-card::after {
+  background: #22c55e;
+}
+
+.medium-card::after {
+  background: #eab308;
+}
+
+.high-card::after {
+  background: #ef4444;
+}
+
+
+/* =========================
+   METRICS
+========================= */
+
+.metrics {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 15px;
+}
+
+.metric-card {
+  background: #0f172a;
+  border: 1px solid #1e293b;
+  padding: 25px 15px;
+  border-radius: 15px;
+  text-align: center;
+}
+
+.metric-card h3 {
+  color: #64748b;
+  font-size: 13px;
+  margin-bottom: 12px;
+}
+
+.metric-card strong {
+  font-size: 25px;
+}
+
+
+/* =========================
+   MODEL COMPARISON
+========================= */
+
+.comparison-table {
+  width: 100%;
+  overflow: hidden;
+  border: 1px solid #1e293b;
+  border-radius: 15px;
+}
+
+.comparison-header,
+.comparison-row {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr 1.5fr;
+  align-items: center;
+  text-align: center;
+}
+
+.comparison-header {
+  padding: 18px;
+  background: #111827;
+  color: #cbd5e1;
+}
+
+.comparison-row {
+  padding: 17px;
+  background: #0f172a;
+  border-top: 1px solid #1e293b;
+}
+
+.comparison-row span:first-child {
+  text-align: left;
+  font-weight: bold;
+}
+
+.best-value {
+  color: #86efac;
+  font-weight: bold;
+}
+
+.selected-model {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  margin-top: 18px;
+  padding: 16px;
+  border: 1px solid #312e81;
+  background: #111827;
+  border-radius: 12px;
+  color: #94a3b8;
+}
+
+.selected-model strong {
+  color: #a78bfa;
+}
+
+.selected-dot {
+  width: 8px;
+  height: 8px;
+  background: #22c55e;
+  border-radius: 50%;
+}
+
+
+/* =========================
+   FEATURE IMPORTANCE
+========================= */
+
+.feature-card {
+  background: #0f172a;
+  border: 1px solid #1e293b;
+  border-radius: 16px;
+  padding: 25px;
+}
+
+.feature-row {
+  margin-bottom: 20px;
+}
+
+.feature-row:last-child {
+  margin-bottom: 0;
+}
+
+.feature-name {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.feature-rank {
+  width: 35px;
+  color: #475569;
+  font-size: 12px;
+}
+
+.feature-name strong {
+  flex: 1;
+}
+
+.feature-percent {
+  color: #94a3b8;
+  font-size: 13px;
+}
+
+.feature-bar-background {
+  height: 10px;
+  background: #1e293b;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-left: 35px;
+}
+
+.feature-bar {
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    #4c1d95,
+    #8b5cf6
+  );
+  border-radius: 10px;
+}
+
+
+/* =========================
+   ANALYTICS
+========================= */
+
+.analytics-card {
+  background: #0f172a;
+  border: 1px solid #1e293b;
+  border-radius: 16px;
+  padding: 25px;
+  margin-bottom: 20px;
+}
+
+.analytics-card h3 {
+  margin-top: 0;
+  margin-bottom: 25px;
+}
+
+
+/* =========================
+   RISK BARS
+========================= */
+
+.risk-row {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: 15px;
+  align-items: center;
+  margin: 20px 0;
+}
+
+.risk-bar-background,
+.bar-background {
+  height: 32px;
+  background: #1e293b;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.risk-bar,
+.bar {
+  height: 100%;
+  min-width: 45px;
+  padding: 7px 12px;
+  font-size: 13px;
+  font-weight: bold;
+  border-radius: 8px;
+  white-space: nowrap;
+}
+
+.low-risk-bar {
+  background: #16a34a;
+}
+
+.medium-risk-bar {
+  background: #eab308;
+  color: #0f172a;
+}
+
+.high-risk-bar {
+  background: #dc2626;
+}
+
+.bar-row {
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  gap: 15px;
+  align-items: center;
+  margin: 20px 0;
+}
+
+.normal-bar {
+  background: #334155;
+}
+
+.fraud-bar {
+  background: #7c3aed;
+}
+
+
+/* =========================
+   CONFUSION MATRIX
+========================= */
+
+.confusion-matrix {
+  display: grid;
+  grid-template-columns: 140px 1fr 1fr;
+  gap: 10px;
+  text-align: center;
+  align-items: center;
+}
+
+.confusion-matrix strong {
+  padding: 10px;
+  font-size: 13px;
+  color: #94a3b8;
+}
+
+.matrix-cell {
+  padding: 25px;
+  border-radius: 12px;
+  font-size: 25px;
+  font-weight: bold;
+}
+
+.matrix-cell span {
+  display: block;
+  font-size: 12px;
+  margin-bottom: 8px;
+  color: #94a3b8;
+}
+
+.tn {
+  background: #052e16;
+  color: #86efac;
+}
+
+.fp {
+  background: #451a03;
+  color: #fbbf24;
+}
+
+.fn {
+  background: #450a0a;
+  color: #fca5a5;
+}
+
+.tp {
+  background: #172554;
+  color: #93c5fd;
+}
+
+
+/* =========================
+   TRANSACTION ANALYSIS
+========================= */
+
+.analysis-card {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 20px;
+  background: #0f172a;
+  border: 1px solid #1e293b;
+  border-radius: 18px;
+  padding: 25px;
+}
+
+.analysis-left {
+  padding: 10px;
+}
+
+.input-label {
+  color: #94a3b8;
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+select {
+  width: 100%;
+  padding: 15px;
+  border-radius: 10px;
+  border: 1px solid #334155;
+  background: #020617;
+  color: white;
+  font-size: 15px;
+}
+
+.transaction-info {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.transaction-info div {
+  padding: 18px;
+  background: #020617;
+  border-radius: 12px;
+}
+
+.transaction-info span {
+  display: block;
+  color: #64748b;
+  font-size: 12px;
+  margin-bottom: 8px;
+}
+
+.transaction-info strong {
+  font-size: 17px;
+}
+
+button {
+  width: 100%;
+  margin-top: 20px;
+  padding: 16px;
+  border: none;
+  border-radius: 10px;
+  background: #7c3aed;
+  color: white;
+  font-size: 15px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+button:hover {
+  background: #8b5cf6;
+  transform: translateY(-1px);
+}
+
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+
+/* =========================
+   RESULT
+========================= */
+
+.analysis-result {
+  min-height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #020617;
+  border-radius: 15px;
+  border: 1px solid #1e293b;
+}
+
+.empty-result {
+  text-align: center;
+  padding: 30px;
+}
+
+.empty-icon {
+  font-size: 45px;
+  color: #475569;
+}
+
+.empty-result h3 {
+  margin: 15px 0 8px;
+}
+
+.empty-result p {
+  color: #64748b;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.result-content {
+  width: 100%;
+  text-align: center;
+  padding: 30px;
+}
+
+.result-label {
+  color: #64748b;
+  font-size: 12px;
+  font-weight: bold;
+  letter-spacing: 2px;
+}
+
+.score {
+  margin: 10px 0;
+  font-size: 70px;
+  font-weight: bold;
+}
+
+.score span {
+  color: #64748b;
+  font-size: 18px;
+  font-weight: normal;
+}
+
+.probability {
+  display: flex;
+  justify-content: space-between;
+  padding: 15px;
+  background: #0f172a;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+.probability span {
+  color: #94a3b8;
+}
+
+.risk-badge,
+.table-risk {
+  display: inline-block;
+  padding: 9px 18px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.risk-low {
+  background: #14532d;
+  color: #86efac;
+}
+
+.risk-medium {
+  background: #713f12;
+  color: #fde047;
+}
+
+.risk-high {
+  background: #7f1d1d;
+  color: #fca5a5;
+}
+
+
+/* =========================
+   HISTORY
+========================= */
+
+.history {
+  padding: 30px;
+  background: #0f172a;
+  border: 1px solid #1e293b;
+  border-radius: 18px;
+}
+
+.table-wrapper {
+  overflow-x: auto;
+}
+
+.history table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.history th {
+  padding: 15px;
+  text-align: left;
+  color: #64748b;
+  font-size: 12px;
+  text-transform: uppercase;
+}
+
+.history td {
+  padding: 17px 15px;
+  border-top: 1px solid #1e293b;
+}
+
+.history tr:hover {
+  background: #111827;
+}
+
+.no-transactions {
+  text-align: center;
+  padding: 40px;
+  color: #64748b;
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
+footer {
+  text-align: center;
+  margin-top: 60px;
+  padding: 25px;
+  border-top: 1px solid #1e293b;
+  color: #475569;
+  font-size: 13px;
+}
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 900px) {
+
+  .stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .metrics {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .analysis-card {
+    grid-template-columns: 1fr;
+  }
+
+}
+
+@media (max-width: 600px) {
+
+  .hero h1 {
+    font-size: 40px;
+  }
+
+  .hero p {
+    font-size: 15px;
+  }
+
+  .stats {
+    grid-template-columns: 1fr;
+  }
+
+  .metrics {
+    grid-template-columns: 1fr;
+  }
+
+  .comparison-table {
+    min-width: 650px;
+  }
+
+  .comparison-header,
+  .comparison-row {
+    grid-template-columns: 1fr 1.5fr 1.5fr;
+  }
+
+  .feature-card {
+    padding: 18px;
+  }
+
+  .confusion-matrix {
+    grid-template-columns: 1fr;
+  }
+
+  .risk-row {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .bar-row {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .transaction-info {
+    grid-template-columns: 1fr;
+  }
+
+  .history {
+    width: 90%;
+    padding: 20px;
+  }
+
+}
