@@ -12,8 +12,7 @@ data/creditcard.csv
 database/trustledger.db
 *.db
 
-# Machine learning generated files
-ml/fraud_model.pkl
+
 
 # Node
 frontend/node_modules/

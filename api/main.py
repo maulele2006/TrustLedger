@@ -1,12 +1,3 @@
-from sklearn.model_selection import train_test_split
-from sklearn.metrics import (
-    accuracy_score,
-    precision_score,
-    recall_score,
-    f1_score,
-    roc_auc_score,
-    confusion_matrix
-)
 from database.database import create_table, save_transaction, get_transactions
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
@@ -14,9 +5,9 @@ import joblib
 import pandas as pd
 
 app = FastAPI(title="TrustLedger API")
+
 create_table()
 
-# Allow React frontend to communicate with FastAPI
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
@@ -28,36 +19,26 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Load trained fraud detection model
 model = joblib.load("ml/fraud_model.pkl")
-dataset = pd.read_csv("data/creditcard.csv")
-X = dataset.drop("Class", axis=1)
-y = dataset["Class"]
 
-X_train, X_test, y_train, y_test = train_test_split(
-    X,
-    y,
-    test_size=0.2,
-    random_state=42,
-    stratify=y
-)
+dataset = pd.read_csv("data/sample_transactions.csv")
 
-y_pred = model.predict(X_test)
-y_prob = model.predict_proba(X_test)[:, 1]
-cm = confusion_matrix(y_test, y_pred)
+normal_count = 284315
+fraud_count = 492
 
-tn, fp, fn, tp = cm.ravel()
+tn = 56856
+fp = 8
+fn = 21
+tp = 77
 
-normal_count = int((y == 0).sum())
-fraud_count = int((y == 1).sum())
 model_metrics = {
-    "accuracy": round(accuracy_score(y_test, y_pred) * 100, 2),
-    "precision": round(precision_score(y_test, y_pred) * 100, 2),
-    "recall": round(recall_score(y_test, y_pred) * 100, 2),
-    "f1_score": round(f1_score(y_test, y_pred) * 100, 2),
-    "roc_auc": round(roc_auc_score(y_test, y_prob) * 100, 2)
+    "accuracy": 99.95,
+    "precision": 90.59,
+    "recall": 78.57,
+    "f1_score": 84.15,
+    "roc_auc": 95.73
 }
-dataset = pd.read_csv("data/creditcard.csv")
+
 
 @app.get("/")
 def home():
@@ -96,6 +77,8 @@ def predict(transaction: dict):
         "trust_score": trust_score,
         "risk_level": risk
     }
+
+
 @app.get("/transactions")
 def transactions():
 
@@ -111,6 +94,8 @@ def transactions():
         }
         for row in rows
     ]
+
+
 @app.get("/stats")
 def stats():
 
@@ -127,15 +112,22 @@ def stats():
         "medium": medium,
         "high": high
     }
+
+
 @app.get("/sample-transactions")
 def sample_transactions():
 
     samples = dataset.sample(10, random_state=42)
 
     return samples.to_dict(orient="records")
+
+
 @app.get("/model-performance")
 def model_performance():
+
     return model_metrics
+
+
 @app.get("/analytics")
 def analytics():
 
@@ -143,12 +135,14 @@ def analytics():
         "normal_count": normal_count,
         "fraud_count": fraud_count,
         "confusion_matrix": {
-            "true_negative": int(tn),
-            "false_positive": int(fp),
-            "false_negative": int(fn),
-            "true_positive": int(tp)
+            "true_negative": tn,
+            "false_positive": fp,
+            "false_negative": fn,
+            "true_positive": tp
         }
     }
+
+
 @app.get("/model-comparison")
 def model_comparison():
 
@@ -161,7 +155,6 @@ def model_comparison():
                 "f1_score": 10.42,
                 "roc_auc": 97.21
             },
-
             "Random Forest": {
                 "accuracy": 99.95,
                 "precision": 90.59,
@@ -170,9 +163,10 @@ def model_comparison():
                 "roc_auc": 95.73
             }
         },
-
         "selected_model": "Random Forest"
     }
+
+
 @app.get("/feature-importance")
 def feature_importance():
 
