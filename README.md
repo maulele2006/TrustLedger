@@ -1,59 +1,65 @@
 # TrustLedger
 
-## AI-Powered Financial Fraud Detection & Risk Assessment Platform
+### AI-Powered Financial Fraud Detection & Risk Analysis Platform
 
-TrustLedger is a full-stack machine learning application that analyzes financial transactions, predicts fraud probability, generates a trust/risk score, and provides an interactive dashboard for transaction monitoring and model analysis.
+TrustLedger is a full-stack machine learning application that analyzes financial transactions, predicts the probability of fraud, and converts the prediction into an easy-to-understand risk assessment.
 
-The system combines a Random Forest fraud detection model with a FastAPI backend, React frontend, and SQLite database.
+The platform combines a **Random Forest machine learning model**, **FastAPI backend**, **SQLite database**, and **React dashboard** into a complete end-to-end fraud detection system.
+
+---
+## 🖥️ Dashboard Preview
+
+![TrustLedger Dashboard](docs/dashboard.png)
+## 🚀 Key Features
+
+- 🔍 **Fraud Detection** — Predict whether a transaction is potentially fraudulent
+- 📊 **Fraud Probability** — Display the model's estimated probability of fraud
+- 🛡️ **Risk Assessment** — Convert predictions into Low, Medium, and High risk levels
+- 📈 **Model Performance** — View Accuracy, Precision, Recall, F1-Score, and ROC-AUC
+- ⚖️ **Model Comparison** — Compare Random Forest with Logistic Regression
+- 🔬 **Feature Importance** — Identify the features contributing most to predictions
+- 📊 **Transaction Analytics** — View fraud/normal distribution and confusion matrix
+- 🗄️ **Transaction History** — Store analyzed transactions using SQLite
+- ⚡ **REST API** — FastAPI endpoints connecting the ML model with the frontend
+- 💻 **Interactive Dashboard** — React-based interface for analyzing transactions
 
 ---
 
-## Features
+## 🖥️ Dashboard
 
-- AI-powered credit card fraud detection
-- Fraud probability prediction
-- Transaction trust/risk scoring
-- Low, Medium, and High risk classification
-- Random Forest fraud detection model
-- Logistic Regression vs Random Forest comparison
-- Model performance evaluation
-- Feature importance analysis
-- Confusion matrix visualization
-- Fraud vs normal transaction analytics
-- Risk distribution dashboard
+TrustLedger provides an interactive dashboard for monitoring fraud detection performance and analyzing individual transactions.
+
+The dashboard includes:
+
+- Overall risk overview
+- Model performance metrics
+- Model comparison
+- Feature importance
+- Risk distribution
+- Fraud vs. normal transaction analysis
+- Confusion matrix
+- Transaction analysis
 - Transaction history
-- SQLite database storage
-- REST API using FastAPI
-- Interactive React dashboard
 
 ---
 
-## System Architecture
+## 🧠 Machine Learning
+
+TrustLedger uses a **Random Forest Classifier** trained on the Credit Card Fraud Detection dataset.
+
+### Dataset
+
+The dataset contains:
+
+- **284,807 transactions**
+- **492 fraudulent transactions**
+- **30 input features**
+- Severe class imbalance
+
+The original dataset contains:
 
 ```text
-                    ┌─────────────────────┐
-                    │    React Frontend   │
-                    │      Dashboard      │
-                    └──────────┬──────────┘
-                               │
-                               │ REST API
-                               ▼
-                    ┌─────────────────────┐
-                    │     FastAPI API     │
-                    │   Prediction Layer  │
-                    └──────────┬──────────┘
-                               │
-                ┌──────────────┴──────────────┐
-                │                             │
-                ▼                             ▼
-       ┌─────────────────┐          ┌─────────────────┐
-       │ Random Forest   │          │ SQLite Database │
-       │ Fraud Model     │          │ Transaction Log │
-       └─────────────────┘          └─────────────────┘
-                │
-                ▼
-       ┌─────────────────┐
-       │ Fraud Probability│
-       │ Trust Score      │
-       │ Risk Level       │
-       └─────────────────┘
+Time
+V1 - V28
+Amount
+Class
