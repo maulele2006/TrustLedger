@@ -53,7 +53,9 @@ def home():
 def predict(transaction: dict):
     data = pd.DataFrame([transaction])
 
-    probability = model.predict_proba(data)[0][1]
+data = data[model.feature_names_in_]
+
+probability = model.predict_proba(data)[0][1]
 
     trust_score = round((1 - probability) * 100, 2)
 
