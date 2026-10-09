@@ -1,3 +1,4 @@
+
 from database.database import create_table, save_transaction, get_transactions
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
@@ -6,18 +7,19 @@ import pandas as pd
 
 app = FastAPI(title="TrustLedger API")
 
-create_table()
-
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
         "http://localhost:5173",
-        "http://127.0.0.1:5173"
+        "http://127.0.0.1:5173",
+        "https://trust-ledger.vercel.app"
     ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+create_table()
 
 model = joblib.load("ml/fraud_model.pkl")
 
@@ -49,7 +51,6 @@ def home():
 
 @app.post("/predict")
 def predict(transaction: dict):
-
     data = pd.DataFrame([transaction])
 
     probability = model.predict_proba(data)[0][1]
@@ -81,7 +82,6 @@ def predict(transaction: dict):
 
 @app.get("/transactions")
 def transactions():
-
     rows = get_transactions()
 
     return [
@@ -98,7 +98,6 @@ def transactions():
 
 @app.get("/stats")
 def stats():
-
     rows = get_transactions()
 
     total = len(rows)
@@ -116,21 +115,17 @@ def stats():
 
 @app.get("/sample-transactions")
 def sample_transactions():
-
     samples = dataset.sample(10, random_state=42)
-
     return samples.to_dict(orient="records")
 
 
 @app.get("/model-performance")
 def model_performance():
-
     return model_metrics
 
 
 @app.get("/analytics")
 def analytics():
-
     return {
         "normal_count": normal_count,
         "fraud_count": fraud_count,
@@ -145,7 +140,6 @@ def analytics():
 
 @app.get("/model-comparison")
 def model_comparison():
-
     return {
         "models": {
             "Logistic Regression": {
@@ -169,7 +163,6 @@ def model_comparison():
 
 @app.get("/feature-importance")
 def feature_importance():
-
     feature_names = [
         "Time",
         "V1", "V2", "V3", "V4", "V5", "V6", "V7",
