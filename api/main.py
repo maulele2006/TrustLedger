@@ -49,11 +49,27 @@ def home():
     }
 
 
+
 @app.post("/predict")
 def predict(transaction: dict):
-    data = pd.DataFrame([transaction])
+    feature_names = list(model.feature_names_in_)
 
-    data = data[model.feature_names_in_]
+    missing_features = [
+        name for name in feature_names
+        if name not in transaction
+    ]
+
+    if missing_features:
+        from fastapi import HTTPException
+        raise HTTPException(
+            status_code=422,
+            detail=f"Missing model features: {missing_features}"
+        )
+
+    data = pd.DataFrame(
+        [[transaction[name] for name in feature_names]],
+        columns=feature_names
+    )
 
     probability = model.predict_proba(data)[0][1]
 
@@ -69,7 +85,7 @@ def predict(transaction: dict):
     fraud_probability = round(probability * 100, 2)
 
     save_transaction(
-        transaction["Amount"],
+        float(transaction["Amount"]),
         fraud_probability,
         trust_score,
         risk
@@ -80,6 +96,7 @@ def predict(transaction: dict):
         "trust_score": trust_score,
         "risk_level": risk
     }
+
 
 
 @app.get("/transactions")
